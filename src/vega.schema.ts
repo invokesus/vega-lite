@@ -1,4 +1,5 @@
 import {AggregateOp} from 'vega';
+import {SampleTransform as VgSampleTransform} from 'vega-typings';
 import {isArray} from 'vega-util';
 import {BaseBin} from './bin';
 import {NiceTime, ScaleType} from './scale';
@@ -404,7 +405,7 @@ export interface VgIdentifierTransform {
   as: string;
 }
 
-export type VgTransform = VgBinTransform | VgExtentTransform | VgFormulaTransform | VgAggregateTransform | VgFilterTransform | VgImputeTransform | VgStackTransform | VgCollectTransform | VgLookupTransform | VgIdentifierTransform | VgGeoPointTransform | VgGeoJSONTransform | VgGeoJSONTransform | VgWindowTransform;
+export type VgTransform = VgBinTransform | VgExtentTransform | VgFormulaTransform | VgAggregateTransform | VgFilterTransform | VgImputeTransform | VgStackTransform | VgCollectTransform | VgLookupTransform | VgIdentifierTransform | VgGeoPointTransform | VgGeoJSONTransform | VgGeoJSONTransform | VgWindowTransform | VgSampleTransform;
 
 export interface VgGeoPointTransform {
   type: 'geopoint';
