@@ -112,7 +112,7 @@ export function parseTransformArray(head: DataFlowNode, model: Model, ancestorPa
       head = new SampleTransformNode(head, t);
 
     } else if (isImpute(t)) {
-      const impute = head = new ImputeTransformNode(head, t);
+      const impute = head = ImputeTransformNode.makeFromTransform(head, t);
 
       for (const field of keys(impute.producedFields())) {
         ancestorParse.set(field, 'derived', false);
@@ -249,7 +249,7 @@ export function parseData(model: Model): DataComponent {
         head = new IdentifierNode(head);
       }
     }
-
+    head = ImputeTransformNode.makeFromEncoding(head, model) || head;
     head = StackNode.makeFromEncoding(head, model) || head;
   }
 

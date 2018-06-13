@@ -263,6 +263,10 @@ export interface ImputeTransform {
    * The field value to use when the imputation `method` is `"value"`.
    */
   value?: any;
+  /**
+   * The frame over which the `method` will be applied.
+   */
+  frame?: (null | number)[];
 }
 
 export interface FlattenTransform {
