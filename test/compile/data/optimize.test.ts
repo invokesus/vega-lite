@@ -3,7 +3,7 @@
 import {assert} from 'chai';
 import {DataFlowNode} from '../../../src/compile/data/dataflow';
 import {ParseNode} from '../../../src/compile/data/formatparse';
-import {mergeParse} from '../../../src/compile/data/optimize';
+import {MoveParse} from '../../../src/compile/data/optimize';
 
 describe('compile/data/optimize', () => {
   describe('mergeParse', () => {
@@ -14,7 +14,8 @@ describe('compile/data/optimize', () => {
       const parse1 = new ParseNode(root, {a: 'number', b: 'string'});
       // @ts-ignore
       const parse2 = new ParseNode(root, {b: 'string', c: 'boolean'});
-      mergeParse(parse1);
+      const optimizer = new MoveParse();
+      optimizer.mergeParse(parse1);
       assert.deepEqual(root.children.length, 1);
       const mergedParseNode = root.children[0] as ParseNode;
       assert.deepEqual(mergedParseNode.parse, {a: 'number', b: 'string', c: 'boolean'});
@@ -26,7 +27,8 @@ describe('compile/data/optimize', () => {
       const parse1 = new ParseNode(root, {a: 'number', b: 'string'});
       // @ts-ignore
       const parse2 = new ParseNode(root, {a: 'boolean', d: 'date'});
-      mergeParse(parse1);
+      const optimizer = new MoveParse();
+      optimizer.mergeParse(parse1);
       assert.deepEqual(root.children.length, 1);
       const mergedParseNode = root.children[0] as ParseNode;
       assert.deepEqual(mergedParseNode.parse, {b: 'string', d: 'date'});
